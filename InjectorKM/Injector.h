@@ -1,14 +1,15 @@
 #pragma once
-#define WARNINGS 4514 4365 5026 5027
+#define WARNINGS 4514 4365 4668 5026 5027
 
 #pragma warning(disable: WARNINGS)
+#include <ntifs.h>
 #include <ntddk.h>
 #pragma warning(disable: WARNINGS)
 
-#define INJECTOR_NAME L"Injector"
 #define DRIVER_PREFIX "Injector: "
 
-
-#define IOCTL_INJECT_BY_PID	CTL_CODE(0x8000, 0x800, METHOD_BUFFERED, FILE_ANY_ACCESS)
+NTSTATUS inject_to_process(ULONG pid, PVOID buffer, SIZE_T size);
+NTSTATUS create_thread_at_address(PVOID address);
+PVOID NTAPI get_kernel_proc_address(LPCWSTR SystemRoutineName);
 
 
