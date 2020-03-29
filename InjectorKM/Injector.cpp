@@ -1,11 +1,9 @@
 #include "Injector.h"
-#include "AutoLock.h"
-#include <ntddk.h>
 
 // PROTOTYPES
 
-DRIVER_UNLOAD ProcessProtectUnload;
-DRIVER_DISPATCH ProcessProtectCreateClose, ProcessProtectDeviceControl;
+DRIVER_UNLOAD InjectorUnload;
+DRIVER_DISPATCH InjectorCreateClose, InjectorDeviceControl;
 
 // DriverEntry
 
@@ -66,7 +64,7 @@ NTSTATUS InjectorDeviceControl(PDEVICE_OBJECT, PIRP Irp) {
 
 	switch (stack->Parameters.DeviceIoControl.IoControlCode) {
 	case IOCTL_INJECT_BY_PID: {
-		AutoLock locker(g_Data.Lock);
+		// AutoLock locker(g_Data.Lock);
 
 	}
 
